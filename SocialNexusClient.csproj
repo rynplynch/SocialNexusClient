@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-SocialNexusClient-d60afdea-e902-40f5-b547-030fe04c46d3</UserSecretsId>
+    <UserSecretsId>aspnet-SocialNexusClient-af59bd7e-8b4e-452c-80e9-2fb9a99aa5e1</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
