@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SocialNexusClient.Models;
 
@@ -23,6 +24,7 @@ public class HomeController : Controller
         return View();
     }
 
+    [Authorize]
     public IActionResult Secured()
     {
         return View((object)"Hello");
