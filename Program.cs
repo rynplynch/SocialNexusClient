@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
 
@@ -13,12 +13,20 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+        builder
+            // default authentication scheme
+            .Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+            // pass configuration settings for SocialNexus AD B2C
             .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAdB2C"));
-        builder.Services.AddControllersWithViews();
-        builder.Services.AddRazorPages()
-            .AddMicrosoftIdentityUI();
 
+        // configure web app to use MVC(model, view, controller) pattern
+        builder.Services.AddControllersWithViews();
+
+        // configure web app to use razore pages
+        // also add UI for identity service
+        builder.Services.AddRazorPages().AddMicrosoftIdentityUI();
+
+        // build our web app using configured services
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -36,9 +44,7 @@ public class Program
 
         app.UseAuthorization();
 
-        app.MapControllerRoute(
-            name: "default",
-            pattern: "{controller=Home}/{action=Index}/{id?}");
+        app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
         app.MapRazorPages();
 
         app.Run();
