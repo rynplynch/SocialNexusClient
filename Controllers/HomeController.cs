@@ -45,6 +45,11 @@ public class HomeController : Controller
         // render the Identities.cshtml view
         return View();
     }
+
+    [Authorize]
+    public IActionResult Scopes()
+    {
+        return View((object)"TODO: present a users scopes here");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
