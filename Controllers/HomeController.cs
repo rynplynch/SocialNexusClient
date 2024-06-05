@@ -36,6 +36,15 @@ public class HomeController : Controller
         return View();
     }
 
+    [Authorize]
+    public IActionResult Identities()
+    {
+        // extract the identities claims principle
+        IEnumerable<ClaimsIdentity> p = HttpContext.User.Identities;
+
+        // render the Identities.cshtml view
+        return View();
+    }
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

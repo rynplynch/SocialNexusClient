@@ -1,0 +1,16 @@
+@using System.Security.Claims;
+
+@{
+    ViewData["Title"] = "Identities";
+    // extract the identities in the claims principle
+    var identities = @User.Identities;
+}
+
+<h1 class="bg-info text-white">Identities</h1>
+
+<!-- loop through each identity from the principle -->
+@foreach (ClaimsIdentity i in identities)
+{
+    <p>@i?.Name</p>
+    <hr />
+}
