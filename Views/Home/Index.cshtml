@@ -2,7 +2,29 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-left">
+    <h1 class="display-4">Welcome to SocialNexus</h1>
+    <p>SocialNexus is a capstone project created by <a href="https://www.linkedin.com/in/ryan-p-lynch/">Ryan P Lynch</a>. It is underdevelopment and is not a finished product. </p>
+    <h2>Mission Statement</h2>
+    <p>Empower users by giving them easy access to their data on the interent.</p>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Current Features</h2>
+            <ul>
+                <li>Create a local account on Azure B2C</li>
+                <li>Register using external identity provider, etc Google</li>
+                <li>A Shop that allows users to create products and delete</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>
+        The Shop
+    </h2>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Shop" asp-action="Index">Go to Shop</a>
+    <p>The shop uses the SocialNexusService to create and store products. It showcases the use of identity tokens and access tokens.</p>
+    <p>Identity tokens are used by the frontend to hide certain UI elements from unregistered users.</p>
+    <p>Access tokens are used by the backend to check if a user is allowed to access an endpoint.
+    They also let us know who is calling the endpoint. We can use this to remember who created a product or to prevent another user from deleting a product not owned by them.</p>
 </div>
