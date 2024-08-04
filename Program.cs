@@ -77,6 +77,7 @@ public class Startup
 
         services.AddControllersWithViews().AddMicrosoftIdentityUI();
 
+        services.AddTransient<ISocialNexusService, SocialNexusService>();
 
         services.AddRazorPages();
 
