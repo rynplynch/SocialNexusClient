@@ -51,6 +51,13 @@ public class Startup
                 // pass configuration settings for SocialNexus AD B2C
                 Configuration.Bind("AzureAdB2C", o);
 
+                // create a new event that gets triggered by OpenId
+                o.Events ??= new OpenIdConnectEvents();
+
+                // if in production
+                if (CurrentEnvironment.IsProduction())
+                    // hardcode the redirect URI
+                    o.Events.OnRedirectToIdentityProvider += SetRedirectURI;
             })
 
         services.AddControllersWithViews().AddMicrosoftIdentityUI();
@@ -94,7 +101,12 @@ public class Startup
         });
     }
 
+    // sets where our user gets sent after logging in
+    public async Task SetRedirectURI(RedirectContext context)
+    {
+        // send the user to the production site
+        context.ProtocolMessage.RedirectUri = "https://social-nexus.net/signin-oidc";
 
-        app.Run();
+        await Task.CompletedTask.ConfigureAwait(false);
     }
 }
