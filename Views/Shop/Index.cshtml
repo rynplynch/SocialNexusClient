@@ -1,0 +1,8 @@
+@{
+    ViewData["Title"] = "Shop";
+}
+<p>
+    @await Component.InvokeAsync("Time")
+    @await Html.PartialAsync("Products/_Create")
+    @await Component.InvokeAsync("Products")
+</p>
