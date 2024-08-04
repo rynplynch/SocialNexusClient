@@ -20,8 +20,6 @@ public class Program
         CreateHostBuilder(args).Build().Run();
     }
 
-        // Add services to the container.
-        builder
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder =>
@@ -47,19 +45,21 @@ public class Startup
         services
             // default authentication scheme
             .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+            // Sign-in users with the Microsoft identity platform
+            .AddMicrosoftIdentityWebApp(o =>
+            {
+                // pass configuration settings for SocialNexus AD B2C
+                Configuration.Bind("AzureAdB2C", o);
 
-        // configure web app to use MVC(model, view, controller) pattern
-        builder.Services.AddControllersWithViews();
+            })
 
-        // configure web app to use razore pages
-        // also add UI for identity service
-        builder.Services.AddRazorPages().AddMicrosoftIdentityUI();
+        services.AddControllersWithViews().AddMicrosoftIdentityUI();
 
-        // build our web app using configured services
-        var app = builder.Build();
 
-        // Configure the HTTP request pipeline.
-        if (!app.Environment.IsDevelopment())
+        services.AddRazorPages();
+
+    }
+
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
