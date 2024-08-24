@@ -79,6 +79,8 @@ public class Startup
 
         services.AddTransient<ISocialNexusService, SocialNexusService>();
 
+        services.AddTransient<IGoogleService, GoogleService>();
+
         services.AddRazorPages();
 
         services.AddDistributedMemoryCache();
